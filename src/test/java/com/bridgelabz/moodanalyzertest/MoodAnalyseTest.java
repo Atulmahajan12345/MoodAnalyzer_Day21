@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import com.bridgelabz.moodanalyser.MoodAnalyseException;
+import com.bridgelabz.moodanalyser.MoodAnalyseException.ExceptionType;
 import com.bridgelabz.moodanalyser.MoodAnalyserService;
 
 public class MoodAnalyseTest 
@@ -16,7 +17,7 @@ public class MoodAnalyseTest
 		MoodAnalyserService moodService = new MoodAnalyserService();
 		assertEquals("sad",moodService.analyseMood("i am in sad mood"));
 	}
-	
+
 	//check for happy mood
 	@Test
 	public void givenMessage_WhenNoMoodSpecified_ShouldReturnhappy() 
@@ -24,7 +25,7 @@ public class MoodAnalyseTest
 		MoodAnalyserService moodService = new MoodAnalyserService();
 		assertEquals("happy",moodService.analyseMood("i am in any mood"));
 	}
-	
+
 	//check for sad mood and message passed through constructor
 	@Test
 	public void givenMessageInConstructor_WhenSad_ShouldReturnSad()
@@ -53,6 +54,21 @@ public class MoodAnalyseTest
 		catch (MoodAnalyseException e) 
 		{
 			assertEquals("message cannot be null", e.getMessage());
+		}
+	}
+
+	//check for empty message passed through constructors
+	@Test
+	public void givenMessageInConstructor_WhenEmptyString_ShouldReturnHappy()
+	{
+		try 
+		{
+			MoodAnalyserService moodAnalyse = new MoodAnalyserService("");		
+			assertEquals("happy",moodAnalyse.analyseMood());			
+		} 
+		catch (MoodAnalyseException e) 
+		{
+			assertEquals(ExceptionType.ENTERED_EMPTY, e.type);
 		}
 	}
 }
