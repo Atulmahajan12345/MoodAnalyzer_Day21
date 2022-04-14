@@ -8,11 +8,11 @@ import com.bridgelabz.moodanalyser.MoodAnalyserService;
 
 public class MoodAnalyseTest 
 {
-	MoodAnalyserService moodService = new MoodAnalyserService();
 	//check for sad mood
 	@Test
 	public void givenMessage_WhenSad_ShouldReturnSad() 
 	{
+		MoodAnalyserService moodService = new MoodAnalyserService();
 		assertEquals("sad",moodService.analyseMood("i am in sad mood"));
 	}
 	
@@ -20,6 +20,31 @@ public class MoodAnalyseTest
 	@Test
 	public void givenMessage_WhenNoMoodSpecified_ShouldReturnhappy() 
 	{
+		MoodAnalyserService moodService = new MoodAnalyserService();
 		assertEquals("happy",moodService.analyseMood("i am in any mood"));
+	}
+	
+	//check for sad mood and message passed through constructor
+	@Test
+	public void givenMessageInConstructor_WhenSad_ShouldReturnSad()
+	{
+		MoodAnalyserService moodAnalyse = new MoodAnalyserService("i am in sad mood");		
+		assertEquals("sad",moodAnalyse.analyseMood());
+	}
+
+	//check for happy mood and message passed through constructor
+	@Test
+	public void givenMessageInConstructor_WhenHappy_ShouldReturnHappy()
+	{
+		MoodAnalyserService moodAnalyse = new MoodAnalyserService("i am in happy mood");		
+		assertEquals("happy",moodAnalyse.analyseMood());
+	}
+
+	//check for null message passed through constructor
+	@Test
+	public void givenMessageInConstructor_WhenNull_ShouldReturnHappy()
+	{
+		MoodAnalyserService moodAnalyse = new MoodAnalyserService(null);		
+		assertEquals("happy",moodAnalyse.analyseMood());
 	}
 }
